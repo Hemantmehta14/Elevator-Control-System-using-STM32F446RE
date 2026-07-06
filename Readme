@@ -1,0 +1,191 @@
+# 🚀 Elevator Control System using STM32F446RE
+
+An embedded elevator control system developed using the STM32F446RE Nucleo board and STM32CubeIDE. The project demonstrates Finite State Machine (FSM) based elevator control, cooperative task scheduling using SysTick, circular queue request management, and software debouncing while simulating elevator movement through LEDs.
+
+---
+
+# Project Overview
+
+This project simulates the behavior of a real elevator using the STM32F446RE microcontroller. Instead of driving an actual motor, LEDs represent elevator movement and operational states.
+
+The firmware is designed using an event-driven architecture, making it modular, scalable, and suitable for real-time embedded applications.
+
+---
+
+# Features
+
+- Event-driven architecture
+- Finite State Machine (FSM)
+- Elevator states:
+  - Idle
+  - Moving Up
+  - Moving Down
+  - Door Open
+- Circular queue for floor requests
+- Multiple floor request handling
+- Software button debouncing
+- SysTick-based cooperative scheduler
+- Timer-based movement control
+- Timer-based door opening/closing
+- GPIO LED simulation
+- Modular firmware design
+- Non-blocking execution
+
+---
+
+# Hardware Used
+
+- STM32 Nucleo-F446RE Development Board
+- Push Buttons (Floor Selection)
+- LEDs
+- USB Cable
+- Breadboard
+- Jumper Wires
+
+---
+
+# Software Used
+
+- STM32CubeIDE
+- STM32CubeMX
+- Embedded C
+- STM32 HAL Drivers
+
+---
+
+# System Architecture
+
+```
++-----------------------+
+|     Push Buttons      |
++-----------+-----------+
+            |
+            v
++-----------------------+
+| Software Debouncing   |
++-----------+-----------+
+            |
+            v
++-----------------------+
+| Circular Queue        |
+| Floor Requests        |
++-----------+-----------+
+            |
+            v
++-----------------------+
+| Elevator FSM          |
++-----------+-----------+
+            |
+            v
++-----------------------+
+| Scheduler (SysTick)   |
++-----------+-----------+
+            |
+            v
++-----------------------+
+| GPIO LEDs             |
++-----------------------+
+```
+
+---
+
+# Finite State Machine
+
+```
+              +---------+
+              |  Idle   |
+              +----+----+
+                   |
+           Floor Request
+                   |
+         +---------+----------+
+         |                    |
+         v                    v
+ +---------------+     +---------------+
+ | Moving Up     |     | Moving Down   |
+ +-------+-------+     +-------+-------+
+         |                     |
+         +----------+----------+
+                    |
+             Destination Reached
+                    |
+                    v
+            +---------------+
+            | Door Open     |
+            +-------+-------+
+                    |
+               Door Timeout
+                    |
+                    v
+                 Idle
+```
+
+---
+
+# Scheduler Tasks
+
+The cooperative scheduler executes the following tasks periodically:
+
+| Task | Function |
+|------|----------|
+| Button Scan | Detect floor requests |
+| Debouncing | Remove switch bouncing |
+| Queue Update | Store pending requests |
+| Elevator FSM | Control elevator states |
+| LED Update | Display current status |
+| Door Timer | Control door open duration |
+
+---
+
+# LED Indications
+
+| LED | Meaning |
+|-----|---------|
+| Green | Idle |
+| Blue | Moving Up |
+| Yellow | Moving Down |
+| Red | Door Open |
+
+---
+
+# Project Workflow
+
+1. User presses a floor button.
+2. Button is debounced.
+3. Floor request is added to the circular queue.
+4. FSM determines movement direction.
+5. Scheduler updates elevator state.
+6. LEDs simulate movement.
+7. Door opens at destination.
+8. Door timer expires.
+9. Elevator returns to Idle.
+10. Next request is processed.
+# Learning Outcomes
+
+This project helped in understanding:
+
+- Embedded firmware architecture
+- Finite State Machines (FSM)
+- Cooperative scheduling
+- SysTick timer
+- GPIO programming
+- Circular Queue implementation
+- Event-driven programming
+- Modular software development
+- Non-blocking embedded design
+- Real-time system concepts
+
+---
+
+# Future Improvements
+
+- OLED/LCD floor display
+- Motor driver integration
+- Stepper/DC motor control
+- Encoder feedback
+- Emergency stop
+- Weight sensor
+- Door obstruction sensor
+- Elevator priority algorithm
+- UART debugging
+- FreeRTOS implementation

@@ -1,0 +1,9 @@
+../Core/Src/main.c:79:6:ShowFloor	5
+../Core/Src/main.c:101:6:ScanButtons	4
+../Core/Src/main.c:122:9:HasRequest	4
+../Core/Src/main.c:127:5:GetNextFloor	15
+../Core/Src/main.c:189:6:ElevatorFSM	10
+../Core/Src/main.c:255:5:main	1
+../Core/Src/main.c:302:6:SystemClock_Config	3
+../Core/Src/main.c:350:13:MX_GPIO_Init	1
+../Core/Src/main.c:401:6:Error_Handler	1
